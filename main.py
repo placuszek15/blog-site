@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, request
 from markupsafe import Markup, escape
 from markdown import markdown
-import random
 from datetime import datetime
 import os
 import logging
@@ -23,6 +22,7 @@ def root():
 
 def change_md_to_html_safe(md):
     return Markup(markdown(escape(md)))
+
 
 def change_md_to_html_unsafe(md):
     return Markup(markdown(md))
@@ -64,9 +64,10 @@ def add_comment(queried_post, form):
             comment_file.write('\n')
             comment_file.write(form['text'])
     except AssertionError:
-            pass
+        pass
     finally:
         return redirect(f'/{queried_post}post_data')
+
 
 @app.route("/<path:queried_post>", methods=['GET', 'POST'])
 def serve(queried_post):
@@ -79,17 +80,17 @@ def serve(queried_post):
 
 
 def serve_post(queried_post="Hello World"):
-    
 
     text = f"Queried Post {queried_post} does not exist"
     comments = [f'Queried Post {queried_post} does not contain any comments']
     hasComments = False
-    posts = [f'{post}' for post in os.listdir('./posts') if os.path.isdir(f'./posts/{post}')]
+    posts = [f'{post}' for post in os.listdir(
+        './posts') if os.path.isdir(f'./posts/{post}')]
     if os.path.exists(f'./posts/{queried_post}'):
         text = handle_body(queried_post)
         if queried_post.endswith('/post_data'):
             queried_post = queried_post.replace('/post_data', '')
-        try: 
+        try:
             comments = handle_comments_read(queried_post)
             hasComments = True
         except NoCommentsError:
@@ -101,8 +102,10 @@ def serve_post(queried_post="Hello World"):
                            hasComments=hasComments
                            )
 
+
 def return_app():
     return app
+
 
 if __name__ == '__main__':
     sys.exit()
