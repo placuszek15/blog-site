@@ -3,7 +3,7 @@ body {
 }
 
 
-a {
+ul a {
   display:  inline-block;
   padding: 1.5vh 1.5vw;
   color: black;
@@ -12,10 +12,13 @@ a {
 
 
 
+
 li {
   display: inline;
 
 }
+
+
 
 p {
   font-family: 'Helvetica';
@@ -31,7 +34,7 @@ h6 {
 
 }
 
-ul {
+ul:not(div > ul) {
   list-style-type: none;
   margin: 16px;
   padding: 0px;
@@ -59,12 +62,29 @@ ul {
   z-index: 1;
 }
 
-a:hover .dropdown-content,a:active .dropdown-content,a:focus .dropdown-content {
+ul a:hover .dropdown-content{
   display: block;
   width: -moz-available;
   width: -webkit-fill-available;
   min-width: fit-content;
   text-indent: 3%;
+}
+
+ul a:active .dropdown-content {
+  display: block;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  min-width: fit-content;
+  text-indent: 3%;
+}
+
+ul  a:focus .dropdown-content {
+  display: block;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  min-width: fit-content;
+  text-indent: 3%;
+
 }
 
 
